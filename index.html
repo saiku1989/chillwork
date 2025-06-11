@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChillWork - 顶级在线游戏平台 | 免费网页游戏中心</title>
+    <meta name="description" content="ChillWork是最佳的免费在线游戏平台，提供冒险RPG、竞速、生存、运动、休闲和恐怖类游戏。无需下载，即点即玩！">
+    <meta name="keywords" content="在线游戏,免费游戏,网页游戏,休闲游戏,ChillWork,RPG游戏,竞速游戏,生存游戏">
+    <meta name="author" content="ChillWork Team">
+    <meta property="og:title" content="ChillWork - 顶级在线游戏平台">
+    <meta property="og:description" content="探索数百款精彩的免费在线游戏，涵盖各种类型，无需下载即可畅玩！">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chillwork.com">
+    <link rel="canonical" href="https://chillwork.com">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    
+    <!-- 游戏配置文件 -->
+    <script src="games/adventure.js"></script>
+    <script src="games/racing.js"></script>
+    <script src="games/survival.js"></script>
+    <script src="games/sports.js"></script>
+    <script src="games/casual.js"></script>
+    <script src="games/horror.js"></script>
+    <script src="games/images.js"></script>
+    <script src="games/gameManager.js"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 min-h-screen">
+    <!-- 顶部导航栏 -->
+    <nav class="bg-black bg-opacity-50 backdrop-blur-sm fixed w-full top-0 z-40 border-b border-purple-500">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-white mr-8">
+                    <i class="fas fa-gamepad mr-2 text-purple-400"></i>ChillWork
+                </h1>
+                <!-- 搜索框 -->
+                <div class="hidden md:flex items-center relative">
+                    <input type="text" id="searchInput" placeholder="搜索游戏..." 
+                           class="bg-white bg-opacity-20 text-white placeholder-gray-300 px-4 py-2 rounded-full w-64 focus:outline-none focus:ring-2 focus:ring-purple-400">
+                    <i class="fas fa-search absolute right-3 text-gray-300"></i>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <!-- 语言切换 -->
+                <button id="langToggle" class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-4 py-2 rounded-full hover:bg-opacity-30 transition-all duration-300">
+                    <i class="fas fa-globe mr-2"></i>
+                    <span id="currentLang">中文</span>
+                </button>
+                
+                <!-- 留言板按钮 -->
+                <button id="messageBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full transition-all duration-300">
+                    <i class="fas fa-comments mr-2"></i>
+                    <span data-zh="留言板" data-en="Messages">留言板</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <div class="pt-20 container mx-auto px-4 py-8">
+        <!-- 头部广告位 -->
+        <div class="ad-banner mb-8">
+            <div class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white text-center py-4 rounded-lg">
+                <p class="text-lg font-bold" data-zh="🎮 体验最佳游戏乐趣 - 广告位招租 🎮" data-en="🎮 Experience The Best Gaming Fun - Ad Space Available 🎮">
+                    🎮 体验最佳游戏乐趣 - 广告位招租 🎮
+                </p>
+            </div>
+        </div>
+
+        <!-- 欢迎标题 -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 animate-pulse">
+                <span data-zh="ChillWork 游戏中心" data-en="ChillWork Game Center">ChillWork 游戏中心</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-6">
+                <span data-zh="探索精彩的在线游戏世界，免费畅玩无限乐趣！" data-en="Explore the exciting world of online games, play for free with unlimited fun!">
+                    探索精彩的在线游戏世界，免费畅玩无限乐趣！
+                </span>
+            </p>
+            
+            <!-- 移动端搜索框 -->
+            <div class="md:hidden mb-6">
+                <div class="relative max-w-sm mx-auto">
+                    <input type="text" id="searchInputMobile" placeholder="搜索游戏..." 
+                           class="bg-white bg-opacity-20 text-white placeholder-gray-300 px-4 py-3 rounded-full w-full focus:outline-none focus:ring-2 focus:ring-purple-400">
+                    <i class="fas fa-search absolute right-4 top-4 text-gray-300"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- 游戏分类导航 -->
+        <div class="game-categories mb-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="category-btn active" data-category="all">
+                    <i class="fas fa-th mr-2"></i>
+                    <span data-zh="全部游戏" data-en="All Games">全部游戏</span>
+                </button>
+                <button class="category-btn" data-category="adventure">
+                    <i class="fas fa-dragon mr-2"></i>
+                    <span data-zh="冒险类" data-en="Adventure">冒险类</span>
+                </button>
+                <button class="category-btn" data-category="racing">
+                    <i class="fas fa-car mr-2"></i>
+                    <span data-zh="竞速类" data-en="Racing">竞速类</span>
+                </button>
+                <button class="category-btn" data-category="survival">
+                    <i class="fas fa-skull mr-2"></i>
+                    <span data-zh="生存类" data-en="Survival">生存类</span>
+                </button>
+                <button class="category-btn" data-category="sports">
+                    <i class="fas fa-basketball-ball mr-2"></i>
+                    <span data-zh="运动类" data-en="Sports">运动类</span>
+                </button>
+                <button class="category-btn" data-category="casual">
+                    <i class="fas fa-leaf mr-2"></i>
+                    <span data-zh="休闲类" data-en="Casual">休闲类</span>
+                </button>
+                <button class="category-btn" data-category="horror">
+                    <i class="fas fa-ghost mr-2"></i>
+                    <span data-zh="恐怖类" data-en="Horror">恐怖类</span>
+                </button>
+                
+                <button class="category-btn" data-category="puzzle">
+                    <i class="fas fa-puzzle-piece mr-2"></i>
+                    <span data-zh="益智类" data-en="Puzzle">益智类</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 游戏网格 -->
+        <div class="games-grid mb-8" id="gamesGrid">
+            <!-- 游戏卡片将通过JavaScript动态生成 -->
+            <div class="loading-games text-center text-white">
+                <div class="loading-spinner mx-auto mb-4"></div>
+                <p data-zh="正在加载游戏..." data-en="Loading games...">正在加载游戏...</p>
+            </div>
+        </div>
+
+        <!-- 侧边广告位 -->
+        <div class="side-ads">
+            <div class="ad-card">
+                <h4 data-zh="推荐游戏" data-en="Recommended">推荐游戏</h4>
+                <p data-zh="发现更多精彩内容" data-en="Discover more exciting content">发现更多精彩内容</p>
+            </div>
+        </div>
+
+        <!-- 游戏展示区域 -->
+        <div class="game-display-section hidden" id="gameDisplay">
+            <!-- 游戏信息面板 -->
+            <div class="game-info-panel">
+                <button class="back-btn" id="backBtn">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    <span data-zh="返回游戏列表" data-en="Back to Games">返回游戏列表</span>
+                </button>
+                
+                <div class="game-info-content">
+                    <div class="game-icon-large">
+                        <i class="fas fa-dragon text-6xl text-yellow-400" id="currentGameIcon"></i>
+                    </div>
+                    <div class="game-details">
+                        <h2 id="currentGameTitle">冒险勇者</h2>
+                        <p id="currentGameDescription">踏上史诗般的冒险旅程！</p>
+                        <div class="game-tags">
+                            <span id="currentGameGenre">RPG冒险</span>
+                            <span data-zh="免费游戏" data-en="Free to Play">免费游戏</span>
+                            <span data-zh="无需下载" data-en="No Download">无需下载</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 游戏容器 -->
+            <div class="game-container">
+                <div class="loading-screen" id="loadingScreen">
+                    <div class="loading-spinner"></div>
+                    <p data-zh="游戏加载中，请稍候..." data-en="Loading game, please wait...">游戏加载中，请稍候...</p>
+                </div>
+                <iframe id="gameFrame" class="game-iframe" frameborder="0" allow="gamepad *; fullscreen"></iframe>
+            </div>
+
+            <!-- 控制按钮 -->
+            <div class="control-buttons">
+                <button id="fullscreenBtn" class="control-btn">
+                    <i class="fas fa-expand"></i>
+                    <span data-zh="全屏" data-en="Fullscreen">全屏</span>
+                </button>
+                <button id="refreshBtn" class="control-btn">
+                    <i class="fas fa-redo"></i>
+                    <span data-zh="刷新" data-en="Refresh">刷新</span>
+                </button>
+                <button id="shareBtn" class="control-btn">
+                    <i class="fas fa-share"></i>
+                    <span data-zh="分享" data-en="Share">分享</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 留言板模态框 -->
+    <div id="messageModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-zh="玩家留言板" data-en="Player Message Board">玩家留言板</h3>
+                <button class="modal-close" id="closeMessageModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- 发表留言 -->
+                <div class="message-form">
+                    <input type="text" id="playerName" placeholder="请输入昵称" data-placeholder-zh="请输入昵称" data-placeholder-en="Enter your nickname">
+                    <textarea id="messageText" placeholder="分享你的游戏体验..." data-placeholder-zh="分享你的游戏体验..." data-placeholder-en="Share your gaming experience..."></textarea>
+                    <button id="postMessage" class="post-btn">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        <span data-zh="发表留言" data-en="Post Message">发表留言</span>
+                    </button>
+                </div>
+
+                <!-- 留言列表 -->
+                <div class="messages-list" id="messagesList">
+                    <!-- 示例留言 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <strong>游戏达人</strong>
+                            <span class="message-time">2024-01-15 14:30</span>
+                        </div>
+                        <div class="message-content">
+                            这个网站的游戏太棒了！冒险勇者让我玩了好几个小时，强烈推荐！
+                        </div>
+                    </div>
+                    
+                    <div class="message-item">
+                        <div class="message-header">
+                            <strong>赛车手</strong>
+                            <span class="message-time">2024-01-15 12:15</span>
+                        </div>
+                        <div class="message-content">
+                            越野赛车的画质和操控感都很不错，手机上玩也很流畅！
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部信息 -->
+    <footer class="bg-black bg-opacity-50 text-white text-center py-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+                <div>
+                    <h4 class="text-lg font-bold mb-3" data-zh="关于我们" data-en="About Us">关于我们</h4>
+                    <p class="text-gray-300" data-zh="ChillWork致力于为全球玩家提供最优质的免费在线游戏体验。" data-en="ChillWork is committed to providing the highest quality free online gaming experience for players worldwide.">
+                        ChillWork致力于为全球玩家提供最优质的免费在线游戏体验。
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-3" data-zh="游戏分类" data-en="Game Categories">游戏分类</h4>
+                    <ul class="text-gray-300 space-y-1">
+                        <li data-zh="冒险游戏" data-en="Adventure Games">冒险游戏</li>
+                        <li data-zh="竞速游戏" data-en="Racing Games">竞速游戏</li>
+                        <li data-zh="生存游戏" data-en="Survival Games">生存游戏</li>
+                        <li data-zh="体育游戏" data-en="Sports Games">体育游戏</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-3" data-zh="联系我们" data-en="Contact Us">联系我们</h4>
+                    <div class="text-gray-300">
+                        <p>Email: contact@chillwork.com</p>
+                        <div class="flex justify-center space-x-4 mt-3">
+                            <a href="#" class="text-purple-400 hover:text-purple-300"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="text-purple-400 hover:text-purple-300"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-purple-400 hover:text-purple-300"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 pt-6">
+                <p data-zh="© 2024 ChillWork. 保留所有权利。所有游戏内容版权归原作者所有。" data-en="© 2024 ChillWork. All rights reserved. All game content copyrights belong to their respective owners.">
+                    © 2024 ChillWork. 保留所有权利。所有游戏内容版权归原作者所有。
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
